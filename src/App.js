@@ -46,12 +46,26 @@ class App extends Component {
     });
   }	
 
-  removeCharacter = index => {
+  /*removeCharacter = index => {
     const {characters } = this.state
 
     this.makeDeleteCall(characters[index]).then (callResult => {
     	this.setState({ characters : [callResult] });
     });
+  }*/
+   removeCharacter = index => {
+    const {characters } = this.state
+
+    this.makeDeleteCall(characters[index])
+    .then(callResult => {
+    	if (callResult) {
+    		this.setState({
+      			characters: characters.filter((character, i) => {
+        			return i !== index
+      			}),
+    		})
+    	}
+    })
   }
 
   handleSubmit = character => {
