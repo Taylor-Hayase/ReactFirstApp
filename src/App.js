@@ -23,8 +23,12 @@ class App extends Component {
   makePostCall(character){
    return axios.post('http://localhost:5000/users', character)
     .then(function (response) {
-      console.log(response);
-      return (response.data);
+      console.log(response.status)
+      if (response.status === 201) {
+        return (response.data);}
+      else {
+        return false
+      }
     })
     .catch(function (error) {
       console.log(error);
@@ -38,7 +42,10 @@ class App extends Component {
    	return axios.delete(url.concat('/', character.id), character)
     .then(function (response) {
       console.log(response);
-      return (true);
+      if (response.status === 200) {
+        return (true);}
+      else {
+        return (false);}
     })
     .catch(function (error) {
       console.log(error);
